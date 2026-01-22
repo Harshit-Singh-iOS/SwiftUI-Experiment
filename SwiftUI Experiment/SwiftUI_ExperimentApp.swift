@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct SwiftUI_ExperimentApp: App {
+    let connectivityHelper = ConnectivityHelper()
+    
     var body: some Scene {
         WindowGroup {
             MatrixTapCell()
+                .task {
+                    connectivityHelper.startMonitoring()
+                }
         }
     }
 }

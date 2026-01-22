@@ -45,7 +45,7 @@ struct MatrixTapCell: View {
                                 dfs(row: row, col: col)
                             } label: {
                                 RoundedRectangle(cornerRadius: 4)
-                                    .fill(matrix[row][col].isOrange ? Color.orange : Color.black)
+                                    .fill(matrix[row][col].isOrange ? Color.orange : Color.primary)
                                     .aspectRatio(1, contentMode: .fit)
                             }
                         }
