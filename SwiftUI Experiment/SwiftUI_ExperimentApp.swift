@@ -10,8 +10,9 @@ import BackgroundTasks
 
 @main
 struct SwiftUI_ExperimentApp: App {
-    let connectivityHelper = ConnectivityHelper()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate: AppDelegate
     
+    let connectivityHelper = ConnectivityHelper()
     var body: some Scene {
         WindowGroup {
             TopViewTransition()
@@ -23,6 +24,15 @@ struct SwiftUI_ExperimentApp: App {
 //                        print("Task app refresh starting")
 //                        self.handleAppRefresh(task: task as! BGAppRefreshTask)
 //                    }
+                }
+                .onOpenURL { url in
+                    print(url)
+                    if let comp = URLComponents(string: url.absoluteString) {
+                        print(comp.path)
+                        print(comp.scheme)
+                        print(comp.queryItems)
+                        print(comp.host)
+                    }
                 }
         }
         .backgroundTask(.appRefresh("FIRST BACKGROUND TASK")) { task in
@@ -72,4 +82,28 @@ struct SwiftUI_ExperimentApp: App {
 //            print("Could not schedule task: \(error.localizedDescription)")
 //        }
 //    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]?) -> Bool {
+        print("******* AppDelegate Launch the app delegate ******")
+        return true
+    }
+    
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        let config = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        config.delegateClass = SceneDelegate.self // Specify your custom SceneDelegate
+        return config
+    }
+}
+
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        print("******* SceneDelegate sceneDidBecomeActive ******")
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("******* SceneDelegate scene openURLContexts ******")
+        print(URLContexts.first?.url ?? "No url")
+    }
 }

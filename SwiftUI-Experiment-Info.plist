@@ -6,6 +6,29 @@
 	<array>
 		<string>FIRST BACKGROUND TASK</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>harshit.SwiftUI-Experiment</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>myApp</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>harshit.SwiftUI-Experiment</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>testApp</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>processing</string>
