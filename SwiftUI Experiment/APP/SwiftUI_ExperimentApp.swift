@@ -15,7 +15,7 @@ struct SwiftUI_ExperimentApp: App {
     let connectivityHelper = ConnectivityHelper()
     var body: some Scene {
         WindowGroup {
-            TopViewTransition()
+            ScrollSnapView()
                 .task {
                     connectivityHelper.startMonitoring()
                 }
