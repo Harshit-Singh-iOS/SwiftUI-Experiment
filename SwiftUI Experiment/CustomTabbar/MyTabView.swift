@@ -35,10 +35,10 @@ enum MyAppTab: Hashable, CaseIterable, Identifiable {
     var color: Color {
         switch self {
         case .Home: return .blue
-        case .Profile: return .red
-        case .Favorite: return .yellow
-        case .Star: return .green
-        case .Settings: return .purple
+        case .Profile: return .green
+        case .Favorite: return .red
+        case .Star: return .yellow
+        case .Settings: return .gray
         }
     }
 }
@@ -70,6 +70,7 @@ struct MyTabView: View {
 //            VerticalExpandingTabView(selectedTab: $selectedTab)
             SemiCircleExpandingTabbar(selectedTab: $selectedTab)
 //            CutOutStyleTabbar(selectedTab: $selectedTab)
+//            GridExpandingTabView(selectedTab: $selectedTab)
         }
     }
 }
