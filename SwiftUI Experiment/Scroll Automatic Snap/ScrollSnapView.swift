@@ -83,15 +83,18 @@ class ScrollSnapVM {
         }
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-            
-            var index = self.dataForView.firstIndex(where: { $0.id == self.scrollPosition ?? UUID() }) ?? -1
-            
-            if index == self.dataForView.count - 1 {
-                index = -1
-            }
-            
-            withAnimation {
-                self.scrollPosition = self.dataForView[index + 1].id
+            Task {
+                await MainActor.run {
+                    var index = self.dataForView.firstIndex(where: { $0.id == self.scrollPosition ?? UUID() }) ?? -1
+                    
+                    if index == self.dataForView.count - 1 {
+                        index = -1
+                    }
+                    
+                    withAnimation {
+                        self.scrollPosition = self.dataForView[index + 1].id
+                    }
+                }
             }
         })
     }

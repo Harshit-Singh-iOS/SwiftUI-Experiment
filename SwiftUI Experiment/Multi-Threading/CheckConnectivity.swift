@@ -13,8 +13,10 @@ class ConnectivityHelper {
         
     func startMonitoring() {
         pathMonitor.pathUpdateHandler = { [weak self] path in
-            self?.isConnected(currentPath: path)
-            self?.networkStrength(currentPath: path)
+            Task { @MainActor in
+                self?.isConnected(currentPath: path)
+                self?.networkStrength(currentPath: path)
+            }
         }
         
         
